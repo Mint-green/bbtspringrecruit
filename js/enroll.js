@@ -23,7 +23,6 @@
 // }
 const showCollegepath = 'backend/showCollege.php';
 const showDepartmentpath = 'backend/showDepartment.php';
-const showCollegepath = 'backend/showCollege.php';
 const applypath = 'backend/apply.php';
 const modificationpath = 'backend/modification.php';
 
@@ -206,17 +205,16 @@ function submit() {
     var request = new XMLHttpRequest();
     request.open('POST', applypath, true);
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
-    var data1 = "name=" + name +
+    var data = "name=" + htmlEncode(name) +
         "&gender=" + sex +
         "&grade=" + grade +
         "&college=" + college +
-        "&dormitory=" + dorm +
-        "&phone=" + phonenum +
+        "&dormitory=" + htmlEncode(dorm) +
+        "&phone=" + htmlEncode(phonenum) +
         "&first=" + firstchoose +
         "&second=" + secondchoose +
         "&adjust=" + yorn +
-        "&introduction=" + selfintro;
-    data = htmlEncode(data1);
+        "&introduction=" + htmlEncode(selfintro);
 
     request.send(data);
 
@@ -230,10 +228,12 @@ function submit() {
                 }
                 else {
                     alert(resultmsg.msg);
+                    document.getElementById("submit").disabled = false;
                 }
 
             } else {
                 alert('发生错误' + this.status);
+                document.getElementById("submit").disabled = false;
 
             }
         }
@@ -245,7 +245,7 @@ function submit() {
 // 修改功能
 function modification() {
     //禁用按钮
-    document.getElementById("submit").disabled=true;
+    document.getElementById("edit").disabled = true;
 
     var name = document.getElementById("name").value;
     var sex = getchoice("gender", "male", "female");
@@ -309,7 +309,8 @@ function modification() {
     if (namepro == false || college == "请选择" || dormpro == false || phonenumpro == false ||
         firstchoose == "请选择" || selfintro.length > 50) {
         // alert("1");
-        // document.getElementById("submit").disabled=false;
+        alert("信息填写有误或不完整,请正确填写您的信息哦亲");
+        document.getElementById("edit").disabled = false;
         return;
     }
     // alert("get it!");
@@ -318,17 +319,16 @@ function modification() {
     var request = new XMLHttpRequest();
     request.open('POST', modificationpath, true);
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
-    var data1 = "name=" + name +
+    var data = "name=" + htmlEncode(name) +
         "&gender=" + sex +
         "&grade=" + grade +
         "&college=" + college +
-        "&dormitory=" + dorm +
-        "&phone=" + phonenum +
+        "&dormitory=" + htmlEncode(dorm) +
+        "&phone=" + htmlEncode(phonenum) +
         "&first=" + firstchoose +
         "&second=" + secondchoose +
         "&adjust=" + yorn +
-        "&introduction=" + selfintro;
-    data = htmlEncode(data1);    
+        "&introduction=" + htmlEncode(selfintro);
 
     request.send(data);
 
@@ -341,9 +341,12 @@ function modification() {
                     location.href = "alterok.html";
                 } else {
                     alert(resultmsg.msg);
+                    document.getElementById("edit").disabled = false;
                 }
             } else {
                 alert('发生错误' + this.status);
+                document.getElementById("edit").disabled = false;
+
             }
         }
     }
