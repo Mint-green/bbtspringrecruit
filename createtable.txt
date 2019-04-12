@@ -1,0 +1,32 @@
+
+admin:
+CREATE TABLE `admin` (
+ `username` text NOT NULL,
+ `password` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+
+college:
+CREATE TABLE `college` (
+ `college` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+
+department:
+CREATE TABLE `department` (
+ `department` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+
+information:
+CREATE TABLE `information` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `name` text NOT NULL,
+ `gender` text NOT NULL,
+ `grade` text NOT NULL,
+ `college` text NOT NULL,
+ `dormitory` text NOT NULL,
+ `phone` text NOT NULL,
+ `first` text NOT NULL,
+ `second` text NOT NULL,
+ `adjust` text NOT NULL,
+ `introduction` text NOT NULL,
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4
